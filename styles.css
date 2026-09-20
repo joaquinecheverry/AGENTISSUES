@@ -1,0 +1,229 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: #000;
+}
+
+/* ---------- header ---------- */
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-header {
+  position: relative;
+}
+
+.logo-overlay {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 150px); /* half of the 300px width, frees up transform for the load-in animation */
+  width: 300px;
+  mix-blend-mode: multiply;
+  height: auto;
+  z-index: 100;
+  pointer-events: none;
+  animation: rise-in 0.6s ease both;
+  animation-delay: 0.1s;
+}
+
+.brand-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 0 20px;
+  animation: rise-in 0.6s ease both;
+}
+
+.brand-title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 74.4px; /* 620% of 12px */
+  text-transform: uppercase;
+  margin-right: -74.4px; /* cancel trailing letter-spacing so glyphs are truly centered */
+}
+
+.brand-title__a {
+  display: inline-block;
+  letter-spacing: normal;
+  margin-right: 74.4px; /* preserves the 620% tracking without rotating the gap */
+  transform: rotate(45deg);
+}
+
+.star {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.star path {
+  transition: stroke 0.15s ease, fill 0.15s ease;
+}
+
+.star:hover path {
+  stroke: #ffd400;
+  fill: #ffd400;
+}
+
+.main-nav {
+  margin: 0 10px;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 20;
+  animation: rise-in 0.6s ease both;
+  animation-delay: 0.2s;
+}
+
+.main-nav a {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+  padding: 0 15px;
+}
+
+.main-nav a.active,
+.main-nav a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 3-column covers ---------- */
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0 10px;
+}
+
+.column {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000;
+  border-top: none;
+  transition: border-color 0.15s ease;
+  animation: rise-in 0.6s ease both;
+}
+
+.column:nth-child(1) { animation-delay: 0.3s; }
+.column:nth-child(2) { animation-delay: 0.4s; }
+.column:nth-child(3) { animation-delay: 0.5s; }
+
+.column:hover {
+  border-color: red;
+  cursor: pointer;
+}
+
+.column img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 912 / 1193;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.column img.tee {
+  aspect-ratio: 900 / 1125;
+  object-position: center center;
+}
+
+.price-bar {
+  border-top: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.column:hover .price-bar {
+  color: red;
+  border-color: red;
+}
+
+/* ---------- footer info ---------- */
+
+.info-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 160px 10px 10px;
+}
+
+.info-row.info-row--top {
+  margin: 0 10px;
+}
+
+.info-box {
+  min-width: 0;
+  border: 1px solid #000;
+  padding: 5px;
+  font-family: 'Times New Roman', Times, serif;
+  animation: rise-in 0.6s ease both;
+}
+
+.info-box:nth-child(1) { animation-delay: 0s; }
+.info-box:nth-child(2) { animation-delay: 0.1s; }
+.info-box:nth-child(3) { animation-delay: 0.2s; }
+
+.info-row--top .info-box {
+  border-top: none;
+}
+
+.info-box h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.info-box p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ---------- intro reel ---------- */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.intro-overlay video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
