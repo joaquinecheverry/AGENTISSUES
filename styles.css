@@ -8,6 +8,15 @@ body {
   color: #000;
 }
 
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+html:has(body.no-scroll) {
+  overflow: hidden;
+}
+
 /* ---------- header ---------- */
 
 @keyframes rise-in {
@@ -126,6 +135,8 @@ body {
   border-top: none;
   transition: border-color 0.15s ease;
   animation: rise-in 0.6s ease both;
+  color: inherit;
+  text-decoration: none;
 }
 
 .column:nth-child(1) { animation-delay: 0.3s; }
@@ -165,6 +176,112 @@ body {
 .column:hover .price-bar {
   color: red;
   border-color: red;
+}
+
+/* ---------- product detail page ---------- */
+
+.columns.product-grid {
+  margin-top: 10px;
+  align-items: start;
+}
+
+.product-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hero-strip {
+  position: fixed;
+  top: calc(50% - 36vh);
+  left: 0;
+  width: 100vw;
+  height: 72vh;
+  z-index: -1;
+  overflow: hidden;
+  animation: rise-in 0.6s ease both;
+}
+
+.hero-strip__track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  gap: 10px;
+  will-change: transform;
+}
+
+.hero-strip img {
+  flex: 0 0 auto;
+  width: 60vw;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: auto;
+}
+
+.product-col--hero {
+  height: calc(100vh - 120px);
+  justify-content: flex-end;
+}
+
+.cart-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.cart-controls .info-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cart-controls .qty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cart-controls button {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.credits-col {
+  display: flex;
+}
+
+.credits-box {
+  width: 66%;
+  margin-left: auto;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.info-box.credits-box p {
+  margin: 0 0 16px;
+}
+
+.info-box.credits-box p:last-child {
+  margin-bottom: 0;
+}
+
+.page-issue1 .site-header {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.page-issue1 .main-nav {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.page-issue1 .info-box {
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 /* ---------- footer info ---------- */
