@@ -124,3 +124,22 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', loop, { passive: true });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  var logo = document.querySelector('.logo-overlay');
+  if (!logo) return;
+
+  var SPEED = 0.3;
+  var handedOff = false;
+
+  function update() {
+    if (!handedOff) {
+      handedOff = true;
+      logo.style.animation = 'none';
+    }
+    logo.style.transform = 'translateY(-' + (window.scrollY * SPEED) + 'px)';
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+});
+
+
