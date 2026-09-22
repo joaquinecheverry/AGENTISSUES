@@ -387,16 +387,7 @@ main {
   }
 
   .star {
-    position: fixed;
-    top: auto;
-    right: 10px;
-    bottom: 10px;
-    transform: none;
-    background: #fff;
-    border: 1px solid #000;
-    border-radius: 50%;
-    padding: 6px;
-    z-index: 50;
+    display: none;
   }
 
   /* product page: normal page scroll, images stacked in the flow */
@@ -493,4 +484,5 @@ main {
     z-index: 30;
   }
 }
+
 
