@@ -39,7 +39,6 @@ html:has(body.no-scroll) {
   top: 0;
   left: calc(50% - 150px); /* half of the 300px width, frees up transform for the load-in animation */
   width: 300px;
-  mix-blend-mode: multiply;
   height: auto;
   z-index: 100;
   pointer-events: none;
@@ -60,8 +59,8 @@ html:has(body.no-scroll) {
 
 .brand-title {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  letter-spacing: 74.4px; /* 620% of 12px */
+  font-size: 11px;
+  letter-spacing: 74.4px; /* tracking value kept independent of font-size */
   text-transform: uppercase;
   margin-right: -74.4px; /* cancel trailing letter-spacing so glyphs are truly centered */
 }
@@ -69,7 +68,7 @@ html:has(body.no-scroll) {
 .brand-title__a {
   display: inline-block;
   letter-spacing: normal;
-  margin-right: 74.4px; /* preserves the 620% tracking without rotating the gap */
+  margin-right: 74.4px; /* preserves the tracking without rotating the gap */
   transform: rotate(45deg);
 }
 
@@ -90,7 +89,7 @@ html:has(body.no-scroll) {
 }
 
 .main-nav {
-  margin: 0 10px;
+  margin: 0 10px 10px;
   border: 1px solid #000;
   display: flex;
   justify-content: space-between;
@@ -107,7 +106,7 @@ html:has(body.no-scroll) {
 .main-nav a {
   font-family: 'Times New Roman', Times, serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   color: #000;
   text-decoration: none;
   padding: 0 15px;
@@ -131,9 +130,6 @@ html:has(body.no-scroll) {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  border: 1px solid #000;
-  border-top: none;
-  transition: border-color 0.15s ease;
   animation: rise-in 0.6s ease both;
   color: inherit;
   text-decoration: none;
@@ -142,9 +138,10 @@ html:has(body.no-scroll) {
 .column:nth-child(1) { animation-delay: 0.3s; }
 .column:nth-child(2) { animation-delay: 0.4s; }
 .column:nth-child(3) { animation-delay: 0.5s; }
+.column:nth-child(4) { animation-delay: 0.6s; }
+.column:nth-child(5) { animation-delay: 0.7s; }
 
 .column:hover {
-  border-color: red;
   cursor: pointer;
 }
 
@@ -162,14 +159,14 @@ html:has(body.no-scroll) {
 }
 
 .price-bar {
-  border-top: 1px solid #000;
+  border: 1px solid #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 15px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -218,6 +215,11 @@ html:has(body.no-scroll) {
   pointer-events: auto;
 }
 
+.hero-strip img.portrait {
+  object-fit: contain;
+  background: #fff;
+}
+
 .product-col--hero {
   height: calc(100vh - 120px);
   justify-content: flex-end;
@@ -246,11 +248,16 @@ html:has(body.no-scroll) {
 .cart-controls button {
   font-family: 'Times New Roman', Times, serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   border: none;
   background: none;
   cursor: pointer;
   padding: 0;
+  transition: color 0.15s ease;
+}
+
+.cart-controls button:hover {
+  color: red;
 }
 
 .credits-col {
@@ -270,6 +277,17 @@ html:has(body.no-scroll) {
 
 .info-box.credits-box p:last-child {
   margin-bottom: 0;
+}
+
+.credits-box summary {
+  display: none;
+  list-style: none;
+  font-weight: 700;
+  padding: 4px 0;
+}
+
+.credits-box summary::-webkit-details-marker {
+  display: none;
 }
 
 .page-issue1 .site-header {
@@ -315,13 +333,13 @@ html:has(body.no-scroll) {
 
 .info-box h2 {
   margin: 0 0 8px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
 }
 
 .info-box p {
   margin: 0;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -343,4 +361,121 @@ html:has(body.no-scroll) {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 700px) {
+  .columns:not(.product-grid),
+  .info-row {
+    grid-template-columns: 1fr;
+  }
+
+  .info-row--top .info-box {
+    border-top: 1px solid #000;
+  }
+
+  .cart-controls {
+    grid-template-columns: 1fr;
+  }
+
+  /* product page: normal page scroll, images stacked in the flow */
+  .page-issue1.no-scroll {
+    overflow: auto;
+    height: auto;
+  }
+
+  html:has(.page-issue1.no-scroll) {
+    overflow: auto;
+  }
+
+  /* header pinned so its rendered height is constant and measurable */
+  .page-issue1 .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 40;
+  }
+
+  .page-issue1 .hero-strip {
+    position: static;
+    width: 100%;
+    height: auto;
+    z-index: auto;
+    padding-top: calc(var(--header-h, 110px) + 10px);
+    padding-bottom: 220px;
+  }
+
+  .page-issue1 .hero-strip__track {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .page-issue1 .hero-strip img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .page-issue1 .hero-strip img.portrait {
+    aspect-ratio: auto;
+  }
+
+  .page-issue1 .hero-strip img[aria-hidden="true"] {
+    display: none;
+  }
+
+  /* title/description, contributors (tap to expand), and price overlay the
+     images just like the cart bar does, pinned 10px below the nav */
+  .page-issue1 .columns.product-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    top: calc(var(--header-h, 110px) + 10px);
+    left: 10px;
+    right: 10px;
+    margin: 0;
+    z-index: 30;
+  }
+
+  .page-issue1 .product-col:not(.product-col--hero),
+  .page-issue1 .credits-col {
+    display: contents;
+  }
+
+  .page-issue1 .credits-box {
+    order: 2;
+    width: 100%;
+    margin-left: 0;
+    height: auto;
+    overflow-y: visible;
+  }
+
+  .page-issue1 .price-box {
+    order: 3;
+  }
+
+  .page-issue1 .credits-box summary {
+    display: block;
+    cursor: pointer;
+  }
+
+  .page-issue1 .credits-box summary:hover {
+    color: red;
+  }
+
+  .page-issue1 .product-col--hero {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    height: auto;
+    justify-content: flex-start;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 30;
+  }
 }
