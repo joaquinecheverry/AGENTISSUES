@@ -31,7 +31,15 @@ html:has(body.no-scroll) {
 }
 
 .site-header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 40;
+}
+
+main {
+  padding-top: var(--header-h, 110px);
 }
 
 .logo-overlay {
@@ -97,7 +105,6 @@ html:has(body.no-scroll) {
   padding: 8px 0;
   position: sticky;
   top: 0;
-  background: #fff;
   z-index: 20;
   animation: rise-in 0.6s ease both;
   animation-delay: 0.2s;
@@ -178,7 +185,6 @@ html:has(body.no-scroll) {
 /* ---------- product detail page ---------- */
 
 .columns.product-grid {
-  margin-top: 10px;
   align-items: start;
 }
 
@@ -236,6 +242,11 @@ html:has(body.no-scroll) {
   align-items: center;
   justify-content: center;
   text-align: center;
+  transition: border-color 0.15s ease;
+}
+
+.cart-controls .info-box:hover {
+  border-color: red;
 }
 
 .cart-controls .qty {
@@ -267,8 +278,8 @@ html:has(body.no-scroll) {
 .credits-box {
   width: 66%;
   margin-left: auto;
-  height: calc(100vh - 120px);
-  overflow-y: auto;
+  height: auto;
+  overflow-y: visible;
 }
 
 .info-box.credits-box p {
@@ -288,14 +299,6 @@ html:has(body.no-scroll) {
 
 .credits-box summary::-webkit-details-marker {
   display: none;
-}
-
-.page-issue1 .site-header {
-  background-color: rgba(255, 255, 255, 0.85);
-}
-
-.page-issue1 .main-nav {
-  background-color: rgba(255, 255, 255, 0.85);
 }
 
 .page-issue1 .info-box {
@@ -326,10 +329,6 @@ html:has(body.no-scroll) {
 .info-box:nth-child(1) { animation-delay: 0s; }
 .info-box:nth-child(2) { animation-delay: 0.1s; }
 .info-box:nth-child(3) { animation-delay: 0.2s; }
-
-.info-row--top .info-box {
-  border-top: none;
-}
 
 .info-box h2 {
   margin: 0 0 8px;
@@ -371,10 +370,6 @@ html:has(body.no-scroll) {
     grid-template-columns: 1fr;
   }
 
-  .info-row--top .info-box {
-    border-top: 1px solid #000;
-  }
-
   .cart-controls {
     grid-template-columns: 1fr;
   }
@@ -389,13 +384,8 @@ html:has(body.no-scroll) {
     overflow: auto;
   }
 
-  /* header pinned so its rendered height is constant and measurable */
-  .page-issue1 .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 40;
+  .page-issue1 main {
+    padding-top: calc(var(--header-h, 110px) + 10px);
   }
 
   .page-issue1 .hero-strip {
@@ -403,7 +393,6 @@ html:has(body.no-scroll) {
     width: 100%;
     height: auto;
     z-index: auto;
-    padding-top: calc(var(--header-h, 110px) + 10px);
     padding-bottom: 220px;
   }
 
