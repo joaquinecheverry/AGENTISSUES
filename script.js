@@ -1,3 +1,8 @@
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', function () {
   var overlay = document.getElementById('introOverlay');
   var video = document.getElementById('introVideo');
@@ -125,20 +130,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  var logo = document.querySelector('.logo-overlay');
-  if (!logo) return;
+  var header = document.querySelector('.site-header');
+  if (!header) return;
 
-  var SPEED = 0.3;
-  var handedOff = false;
+  var THRESHOLD = 40;
 
   function update() {
-    if (!handedOff) {
-      handedOff = true;
-      logo.style.animation = 'none';
-    }
-    logo.style.transform = 'translateY(-' + (window.scrollY * SPEED) + 'px)';
+    header.classList.toggle('is-scrolled', window.scrollY > THRESHOLD);
   }
 
+  update();
   window.addEventListener('scroll', update, { passive: true });
 });
 
